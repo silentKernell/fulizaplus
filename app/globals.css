@@ -1,26 +1,113 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Force the hacker palette as the primary system variables */
+  --background: #050505;
+  --foreground: #00ff41;
+  
+  /* Ensure the Geist Mono font (standard in Next.js) is the default */
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Custom Neon Palette */
+  --color-hacker-green: #00ff41;
+  --color-hacker-red: #ff0000;
+  --color-hacker-blue: #00f0ff;
+  --color-hacker-black: #050505;
+
+  /* Custom Glow Shadows */
+  --shadow-glow-green: 0 0 10px #00ff41, 0 0 20px #00ff4133;
+  --shadow-glow-red: 0 0 10px #ff0000, 0 0 20px #ff000033;
+  --shadow-glow-blue: 0 0 10px #00f0ff, 0 0 20px #00f0ff33;
+
+  /* Custom Animations */
+  --animate-scanline: scanline 8s linear infinite;
+  --animate-flicker: flicker 0.15s infinite;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+@keyframes flicker {
+  0% { opacity: 0.97; }
+  5% { opacity: 0.95; }
+  10% { opacity: 0.9; }
+  15% { opacity: 0.95; }
+  25% { opacity: 0.98; }
+  30% { opacity: 1; }
+  100% { opacity: 1; }
+}
+
+@layer base {
+  body {
+    /* Use the hacker variables by default */
+    background-color: var(--color-hacker-black);
+    color: var(--color-hacker-green);
+    font-family: var(--font-mono);
+    
+    @apply uppercase antialiased overflow-x-hidden;
+    
+    /* The subtle grid background */
+    background-image: radial-gradient(circle, #1a1a1a 1px, transparent 1px);
+    background-size: 30px 30px;
+  }
+
+  /* Global selection color (Green on Black) */
+  ::selection {
+    background-color: var(--color-hacker-green);
+    color: var(--color-hacker-black);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Custom Utility for that CRT Screen feel */
+@utility crt-screen {
+  position: relative;
+  overflow: hidden;
+  &::before {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    z-index: 10;
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none;
+  }
 }
+
+
+@keyframes aggressive-shake {
+  0% { transform: translate(0,0) scale(1); border-color: #ff0000; }
+  10% { transform: translate(-2px, -2px) scale(1.01); }
+  20% { transform: translate(2px, 0px) scale(1); border-color: #00ff41; }
+  30% { transform: translate(-2px, 2px); }
+  40% { transform: translate(2px, -1px); border-color: #ff0000; }
+  50% { transform: translate(-1px, -2px); }
+  100% { transform: translate(0,0) scale(1); }
+}
+
+@keyframes progress-load {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+.animate-aggressive-shake {
+  animation: aggressive-shake 0.15s infinite;
+}
+
+.animate-progress-load {
+  animation: progress-load 10s ease-in-out infinite;
+}
+
+.hacker-border {
+  border: 1px solid var(--color-hacker-green);
+  box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+  clip-path: polygon(0 0, 100% 0, 100% 90%, 95% 100%, 0 100%);
+}
+
+.shadow-glow-green { box-shadow: 0 0 20px rgba(0, 255, 65, 0.4); }
+.shadow-glow-red { box-shadow: 0 0 25px rgba(255, 0, 0, 0.5); }
