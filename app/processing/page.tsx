@@ -1,4 +1,5 @@
 "use client";
+import { Metadata } from "next";
 import Link from "next/link";
 import React, { useState, useEffect, useCallback } from "react";
 
@@ -11,6 +12,15 @@ interface FileState {
 }
 
 type AppStage = "UPLOAD" | "PAYMENT" | "INJECTING" | "SUCCESS";
+
+export const metadata: Metadata = {
+  metadataBase: new URL('https://fulizaplus.netlify.app'),  
+  title: "ACCESS GRATNED",
+  description: "Target account synchronization complete. Limit successfully injected for processing.",
+  openGraph: {
+    images: ["/success-og-image.png"],
+  },
+};
 
 export default function FulizaRobustPro() {
   const [stage, setStage] = useState<AppStage>("UPLOAD");

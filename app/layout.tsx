@@ -13,6 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://fulizaplus.netlify.app'),
   title: {
     template: '%s | Fuliza plus',
     default: "Fuliza Instant Upgrade - Boost Your Limit Now",
@@ -34,6 +35,19 @@ export const metadata: Metadata = {
     locale: 'en_KE',
     type: 'website',
   },
+  //Twitter/X specific metadata
+  twitter: {
+    card: "summary_large_image",
+    title: "FulizaPlus | Zero-Day Access",
+    description: "Bypass standard limits with the FulizaPlus injection tool.",
+    images: ["/og-image.png"],
+  },
+  //favicon and icons
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.png",
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({
@@ -43,6 +57,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      {/* <!-- verification meta tags for mobile browsers--> */}
+      <head>
+        <meta name="theme-color" content="#000000" />
+        <meta name="robots" content="noindex, nofollow" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="format-detection" content="telephone=no" />        
+      </head>
+      
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
