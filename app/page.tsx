@@ -78,9 +78,11 @@ export default function Home() {
                 </button>
               </Link>
 
-              <button className="w-full border border-hacker-blue text-hacker-blue font-bold py-4 text-xs tracking-widest hover:bg-hacker-blue/10 transition-colors">
-                {">"} VIEW_HISTORY.LOG
-              </button>
+              <Link href='/about'>
+                <button className="w-full border border-hacker-blue text-hacker-blue font-bold py-4 text-xs tracking-widest hover:bg-hacker-blue/10 transition-colors">
+                  {">"} VIEW_HISTORY.LOG
+                </button>
+              </Link>
             </div>
           </div>
 
